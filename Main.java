@@ -36,26 +36,65 @@ public class Main {
         System.out.println("Get 60: " + bst.get(60));
         System.out.println("Get 99: " + bst.get(99));
         System.out.println();
-        
+
+        // Test maxDepth
+        System.out.println("Max depth of BST: " + bst.maxDepth());
+
+        // Test minValue
+        System.out.println("Minimum value in BST: " + bst.minValue());
+
+        // Test doubleTree
+        System.out.print("Inorder before doubleTree: ");
+        printInorder(bst);
+        bst.doubleTree();
+        System.out.print("Inorder after doubleTree: ");
+        printInorder(bst);
+
+        // Test sameTree
+        BinarySearchTree<Integer> bst2 = new BinarySearchTree<>();
+        bst2.add(50);
+        bst2.add(30);
+        bst2.add(70);
+        bst2.add(20);
+        bst2.add(40);
+        bst2.add(60);
+        bst2.add(80);
+
+        System.out.println("BST same as BST2 before doubleTree? " + bst.sameTree(bst2));
+        bst2.doubleTree();
+        System.out.println("BST same as BST2 after doubleTree? " + bst.sameTree(bst2));
+
+        // Helper method to print inorder traversal
+        private static void printInorder(BinarySearchTree<Integer> bst) 
+        {
+            Iterator<Integer> it = bst.getIterator(BSTInterface.Traversal.InOrder);
+            while (it.hasNext()) 
+            {
+                System.out.print(it.next() + " ");
+            }
+
+            System.out.println();
+        }
+    
         // Test traversals
         System.out.println("=== Test 4: Traversals ===");
         
         System.out.print("Inorder (should be sorted): ");
-    Iterator<Integer> inorder = bst.getIterator(BSTInterface.Traversal.InOrder);
+        Iterator<Integer> inorder = bst.getIterator(BSTInterface.Traversal.InOrder);
         while(inorder.hasNext()){
             System.out.print(inorder.next() + " ");
         }
         System.out.println();
         
         System.out.print("Preorder: ");
-    Iterator<Integer> preorder = bst.getIterator(BSTInterface.Traversal.PreOrder);
+        Iterator<Integer> preorder = bst.getIterator(BSTInterface.Traversal.PreOrder);
         while(preorder.hasNext()){
             System.out.print(preorder.next() + " ");
         }
         System.out.println();
         
         System.out.print("Postorder: ");
-    Iterator<Integer> postorder = bst.getIterator(BSTInterface.Traversal.PostOrder);
+        Iterator<Integer> postorder = bst.getIterator(BSTInterface.Traversal.PostOrder);
         while(postorder.hasNext()){
             System.out.print(postorder.next() + " ");
         }
