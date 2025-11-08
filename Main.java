@@ -63,21 +63,9 @@ public class Main {
         System.out.println("BST same as BST2 before doubleTree? " + bst.sameTree(bst2));
         bst2.doubleTree();
         System.out.println("BST same as BST2 after doubleTree? " + bst.sameTree(bst2));
-
-        // Helper method to print inorder traversal
-        private static void printInorder(BinarySearchTree<Integer> bst) 
-        {
-            Iterator<Integer> it = bst.getIterator(BSTInterface.Traversal.InOrder);
-            while (it.hasNext()) 
-            {
-                System.out.print(it.next() + " ");
-            }
-
-            System.out.println();
-        }
     
         // Test traversals
-        System.out.println("=== Test 4: Traversals ===");
+        System.out.println("\n=== Test 4: Traversals ===");
         
         System.out.print("Inorder (should be sorted): ");
         Iterator<Integer> inorder = bst.getIterator(BSTInterface.Traversal.InOrder);
@@ -117,5 +105,38 @@ public class Main {
             System.out.print(afterRemove.next() + " ");
         }
         System.out.println("\n");
+
+        System.out.println("=== Test 6: Comparator Test (Reverse Order) ===");
+        // Custom comparator: reverse natural order
+        BinarySearchTree<Integer> reverseBST = new BinarySearchTree<>((a, b) -> b - a);
+        
+        // Add elements
+        reverseBST.add(50);
+        reverseBST.add(30);
+        reverseBST.add(70);
+        reverseBST.add(20);
+        reverseBST.add(40);
+        reverseBST.add(60);
+        reverseBST.add(80);
+
+        // Test min and max with reverse comparator
+        System.out.println("Min (should be largest number 80): " + reverseBST.min());
+        System.out.println("Max (should be smallest number 20): " + reverseBST.max());
+
+        // Test inorder traversal (should be descending)
+        System.out.print("Inorder (descending): ");
+        printInorder(reverseBST);
+    }
+
+    // Helper method to print inorder traversal
+    private static void printInorder(BinarySearchTree<Integer> bst) 
+    {
+        Iterator<Integer> it = bst.getIterator(BSTInterface.Traversal.InOrder);
+        while (it.hasNext()) 
+        {
+            System.out.print(it.next() + " ");
+        }
+
+        System.out.println();
     }
 }
