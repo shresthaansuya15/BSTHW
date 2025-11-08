@@ -325,18 +325,15 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
         return(maxDepth(root));    
     }
 
-    private int maxDepth(Node node) 
+    private int maxDepth(BSTNode<T> node) 
     {
         if (node == null)
         {
             return 0;
         }
 
-        // Cast Node to BSTNode<T>
-        BSTNode<T> bstNode = (BSTNode<T>) node;
-
-        int left = maxDepth(bstNode.getLeft());
-        int right = maxDepth(bstNode.getRight());
+        int left = maxDepth(node.getLeft());
+        int right = maxDepth(node.getRight());
 
         if (left > right)
         {
@@ -364,22 +361,20 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
         return(minValue(root));
     }
    
-    private int minValue(Node node)
+    private int minValue(BSTNode<T> node)
     {
         if (node == null) 
         {
             throw new IllegalStateException("Tree is empty");
         }
 
-        BSTNode<T> bstNode = (BSTNode<T>) node;
-
-        if (bstNode.getLeft() == null)
+        if (node.getLeft() == null)
         {
-            return (Integer) bstNode.getInfo();
+            return (Integer) node.getInfo();
         }
         else 
         {
-            return minValue(bstNode.getLeft());
+            return minValue(node.getLeft());
         }
     }
 
@@ -412,21 +407,19 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
         doubleTree(root);       
     }
 
-    private void doubleTree(Node node) 
+    private void doubleTree(BSTNode<T> node) 
     {
         if (node == null)
         {
             return;
         }
 
-        BSTNode<T> bstNode = (BSTNode<T>) node;
+        doubleTree(node.getLeft());
+        doubleTree(node.getRight());
 
-        doubleTree(bstNode.getLeft());
-        doubleTree(bstNode.getRight());
-
-        BSTNode<T> previousLeft = bstNode.getLeft();
-        BSTNode<T> duplicate = new BSTNode<>(bstNode.getInfo());
-        bstNode.setLeft(duplicate);
+        BSTNode<T> previousLeft = node.getLeft();
+        BSTNode<T> duplicate = new BSTNode<>(node.getInfo());
+        node.setLeft(duplicate);
         duplicate.setLeft(previousLeft);    
     }
 
@@ -440,7 +433,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
         return( sameTree(root, other.root));
     }
 
-    private boolean sameTree(Node a, Node b) 
+    private boolean sameTree(BSTNode<T> a, BSTNode<T> b) 
     {
         if (a == null && b == null)
         {
@@ -452,16 +445,12 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
             return false;
         }
 
-        BSTNode<T> nodeA = (BSTNode<T>) a;  
-        BSTNode<T> nodeB = (BSTNode<T>) b;
-
-        if (!nodeA.getInfo().equals(nodeB.getInfo()))
+        if (!a.getInfo().equals(b.getInfo()))
         {
             return false;
         }
 
-        return sameTree(nodeA.getLeft(), nodeB.getLeft() && 
-                        nodeA.getRight(), nodeB.getRight());
+        return sameTree(a.getLeft(), b.getLeft()) && 
+               sameTree(a.getRight(), b.getRight());                       
     }
-
 }
