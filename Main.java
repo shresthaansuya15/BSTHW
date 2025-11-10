@@ -107,7 +107,8 @@ public class Main {
         System.out.println("\n");
 
         System.out.println("=== Test 6: Comparator Test (Reverse Order) ===");
-        // Custom comparator: reverse natural order
+        
+        // Reverse natural order
         BinarySearchTree<Integer> reverseBST = new BinarySearchTree<>((a, b) -> b - a);
         
         // Add elements
