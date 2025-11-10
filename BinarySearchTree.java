@@ -56,6 +56,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
     public boolean isEmpty(){
         return root==null;
     }
+
     //The minimum element in a BST is always going to be the leftmost element in the tree. 
     // This is a result of the binary search property
     // elements to the left are less than or equal to their ancestors
@@ -69,6 +70,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
         }
         return node.getInfo();
     }
+
     // Maximum element is the rightmost element
     // result of binary search property
     // elements to the right are always greater than their ancestors
@@ -82,6 +84,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
         }
         return node.getInfo();
     }
+
     public Integer size(){
         return recSize(root);
     }
@@ -157,6 +160,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
         preOrder(node.getLeft(), queue);
         preOrder(node.getRight(), queue);
     }
+
     private void postOrder(BSTNode<T> node, LinkedQueue<T> queue){
         if(node==null){
             return;
@@ -165,6 +169,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
         postOrder(node.getRight(), queue);
         queue.enqueue(node.getInfo());
     }
+
     private void inOrder(BSTNode<T> node, LinkedQueue<T> queue){
         if(node==null){
             return;
@@ -173,11 +178,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
         queue.enqueue(node.getInfo());
         inOrder(node.getRight(), queue);
     }
-
     
-
-
-
     public Iterator<T> getIterator(BSTInterface.Traversal orderType){
         //Goal: Create and returns an Iterator providing a traversal of a "snapshot" of the current tree in the order indicated by the argument
         //support preorder, postorder,inorder traversal
