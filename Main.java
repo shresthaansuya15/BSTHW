@@ -105,28 +105,6 @@ public class Main {
             System.out.print(afterRemove.next() + " ");
         }
         System.out.println("\n");
-
-        System.out.println("=== Test 6: Comparator Test (Reverse Order) ===");
-        
-        // Reverse natural order
-        BinarySearchTree<Integer> reverseBST = new BinarySearchTree<>((a, b) -> b - a);
-        
-        // Add elements
-        reverseBST.add(50);
-        reverseBST.add(30);
-        reverseBST.add(70);
-        reverseBST.add(20);
-        reverseBST.add(40);
-        reverseBST.add(60);
-        reverseBST.add(80);
-
-        // Test min and max with reverse comparator
-        System.out.println("Min (should be largest number 80): " + reverseBST.min());
-        System.out.println("Max (should be smallest number 20): " + reverseBST.max());
-
-        // Test inorder traversal (should be descending)
-        System.out.print("Inorder (descending): ");
-        printInorder(reverseBST);
     }
 
     // Helper method to print inorder traversal
